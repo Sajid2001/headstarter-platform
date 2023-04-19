@@ -12,7 +12,7 @@ export default function Video(props) {
 
   return (
     <Grid container style={{ height: "100%"}}>
-      <Grid item xs={gridSpacing} sx={{margin:1, borderRadius:"10px"}}>
+      <Grid item xs={gridSpacing} spacing = {3}>
         <AgoraVideoPlayer
           videoTrack={tracks[1]}
           style={{ height: "100%", width: "100%" }}
@@ -22,7 +22,7 @@ export default function Video(props) {
         users.map((user) => {
           if (user.videoTrack) {
             return (
-              <Grid item xs={gridSpacing} spacing = {2}>
+              <Grid item xs={gridSpacing} spacing = {3}>
                 <AgoraVideoPlayer
                   videoTrack={user.videoTrack}
                   key={user.uid}
