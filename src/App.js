@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { Navigate,Route, Routes } from "react-router-dom";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Account from "./components/Account";
+import { AuthContextProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import GroupPage from "./pages/GroupPage";
+import SingleGroup from "./pages/SingleGroup";
+import CreateGroup from "./pages/CreateGroup";
+import HomePage from "./pages/HomePage";
+import VideoConference from "./pages/VideoConference";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AuthContextProvider>
+        <Routes>
+          <Route path ="/" element = {<Signin/>} />
+          <Route path ="signup" element = {<Signup/>} />
+          <Route path ="account" element = {<Account/>}>
+              <Route path="/account" element = {<Navigate replace to="home"/>}/>
+              <Route path="home" element = {<HomePage/>}/>
+              <Route path="groups" element = {<GroupPage/>}/>
+              <Route path = "group/:id" element ={<SingleGroup/>}/>
+              <Route path = "conference/:id" element = {<VideoConference/>}/>
+              <Route path = "group/create" element ={<CreateGroup/>}/>
+          </Route>
+        </Routes>
+      </AuthContextProvider>
+
     </div>
   );
 }
