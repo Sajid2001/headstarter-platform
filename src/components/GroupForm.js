@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { collection, addDoc } from 'firebase/firestore';
 import {db} from '../firebase'
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -17,6 +18,7 @@ export default function GroupForm() {
     const [newName, setNewName] = useState("");
     const [newDescription, setNewDescription] = useState("");
     const groupsCollectionRef = collection(db, "groups")
+    const navigate = useNavigate();
 
     const createGroup = async() => {
         await addDoc(groupsCollectionRef,{name:newName, description:newDescription, members:[], events:[],})
@@ -24,6 +26,7 @@ export default function GroupForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     createGroup();
+    navigate("/account/groups")
   };
 
   return (
@@ -58,7 +61,6 @@ export default function GroupForm() {
                 fullWidth
                 multiline
                 rows={4}
-                defaultValue="Description"
                 onChange={(e) => {setNewDescription(e.target.value)}}
             />
             <Button

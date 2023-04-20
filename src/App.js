@@ -1,7 +1,7 @@
 import { Navigate,Route, Routes } from "react-router-dom";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
-import Account from "./components/Account";
+import Account from "./pages/Account";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GroupPage from "./pages/GroupPage";
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path ="/" element = {<Signin/>} />
           <Route path ="signup" element = {<Signup/>} />
-          <Route path ="account" element = {<Account/>}>
+          <Route path ="account" element = {<ProtectedRoute> <Account/> </ProtectedRoute>}>
               <Route path="/account" element = {<Navigate replace to="home"/>}/>
               <Route path="home" element = {<HomePage/>}/>
               <Route path="groups" element = {<GroupPage/>}/>
